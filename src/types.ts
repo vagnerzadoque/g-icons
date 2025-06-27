@@ -6,4 +6,4 @@ export interface IconProps extends React.SVGProps<SVGSVGElement> {
   className?: string;
 }
 
-export type IconComponent = React.FC<IconProps>; 
+export type IconComponent = React.FC<IconProps>;

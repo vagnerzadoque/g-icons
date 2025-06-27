@@ -1,92 +1,75 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Icon, IconList } from './Icon';
+import { Icon } from './Icon';
 
 const meta: Meta<typeof Icon> = {
   title: 'Components/Icon',
   component: Icon,
+  argTypes: {
+    name: { control: 'text', description: 'Nome do ícone a ser renderizado' },
+    size: { control: { type: 'number', min: 16, max: 64, step: 4 }, description: 'Tamanho do ícone em pixels' },
+    color: { control: 'color', description: 'Cor do ícone' },
+    className: { control: 'text', description: 'Classes CSS adicionais' },
+  },
   parameters: {
     layout: 'centered',
-  },
-  tags: ['autodocs'],
-  argTypes: {
-    name: {
-      control: 'text',
-      description: 'Nome do ícone a ser renderizado',
-    },
-    size: {
-      control: { type: 'number', min: 16, max: 64, step: 4 },
-      description: 'Tamanho do ícone em pixels',
-    },
-    color: {
-      control: 'color',
-      description: 'Cor do ícone',
-    },
-    className: {
-      control: 'text',
-      description: 'Classes CSS adicionais',
-    },
   },
 };
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof Icon>;
 
-export const Default: Story = {
+export const FilledActionAdd: Story = {
   args: {
-    name: 'FilledActionAdd',
-    size: 24,
+    name: 'filled-action-add',
+    size: 32,
     color: '#007bff',
+  },
+};
+
+export const FilledActionCheck: Story = {
+  args: {
+    name: 'filled-action-check',
+    size: 32,
+    color: '#28a745',
+  },
+};
+
+export const FilledBrandFacebook: Story = {
+  args: {
+    name: 'filled-brand-facebook',
+    size: 32,
+    color: '#1877f2',
+  },
+};
+
+export const FilledAlertWarning: Story = {
+  args: {
+    name: 'filled-alert-warning',
+    size: 32,
+    color: '#ffc107',
+  },
+};
+
+export const FilledContentGiftpricefair: Story = {
+  args: {
+    name: 'filled-content-giftpricefair',
+    size: 32,
+    color: '#e83e8c',
   },
 };
 
 export const Large: Story = {
   args: {
-    name: 'FilledActionCheck',
-    size: 48,
+    name: 'filled-action-check',
+    size: 64,
     color: '#28a745',
   },
 };
 
 export const Small: Story = {
   args: {
-    name: 'FilledActionDelete',
+    name: 'filled-action-check',
     size: 16,
-    color: '#dc3545',
-  },
-};
-
-export const CustomColor: Story = {
-  args: {
-    name: 'FilledBrandFacebook',
-    size: 32,
-    color: '#1877f2',
-  },
-};
-
-// Story para o IconList
-const iconListMeta: Meta<typeof IconList> = {
-  title: 'Components/IconList',
-  component: IconList,
-  parameters: {
-    layout: 'padded',
-  },
-  tags: ['autodocs'],
-  argTypes: {
-    size: {
-      control: { type: 'number', min: 16, max: 64, step: 4 },
-    },
-    color: {
-      control: 'color',
-    },
-    onIconClick: {
-      action: 'icon-clicked',
-    },
-  },
-};
-
-export const IconGallery: StoryObj<typeof IconList> = {
-  args: {
-    size: 32,
-    color: '#333',
+    color: '#28a745',
   },
 }; 

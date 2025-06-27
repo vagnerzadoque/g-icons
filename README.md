@@ -1,167 +1,142 @@
-# G Icons - Biblioteca de Ícones React
+# G-Icons
 
-Uma biblioteca moderna e flexível de ícones SVG para React, com suporte completo a TypeScript.
+Uma biblioteca de ícones React moderna construída com Vite e TypeScript.
 
 ## 🚀 Características
 
-- ✅ **TypeScript First** - Suporte completo a tipos
-- ✅ **Tree Shaking** - Importação otimizada
-- ✅ **Customização** - Tamanho, cor e classes CSS
-- ✅ **Auto-geração** - Scripts para converter SVGs automaticamente
-- ✅ **Documentação** - Storybook integrado
-- ✅ **Testes** - Cobertura completa
-- ✅ **Bundle Otimizado** - Rollup para produção
+- **Vite**: Build rápido e moderno
+- **TypeScript**: Tipagem completa
+- **Storybook v8+**: Documentação interativa
+- **SVG Otimização**: Processo automático de limpeza e otimização
+- **ESLint**: Linting de código
+- **Rollup**: Bundling otimizado para bibliotecas
 
 ## 📦 Instalação
 
 ```bash
 npm install g-icons
-# ou
-yarn add g-icons
 ```
 
-## 🎯 Uso Básico
-
-### Importação Individual (Recomendado)
-
-```tsx
-import { FilledActionAdd, FilledActionCheck } from 'g-icons';
-
-function MyComponent() {
-  return (
-    <div>
-      <FilledActionAdd size={24} color="#007bff" />
-      <FilledActionCheck size={32} color="green" />
-    </div>
-  );
-}
-```
-
-### Importação Dinâmica
+## 🎯 Uso
 
 ```tsx
 import { Icon } from 'g-icons';
 
-function MyComponent() {
+function App() {
   return (
     <div>
-      <Icon name="FilledActionAdd" size={24} color="#007bff" />
-      <Icon name="FilledActionCheck" size={32} color="green" />
+      <Icon name="filled-action-add" size={24} color="#007bff" />
+      <Icon name="filled-action-check" size={32} color="#28a745" />
     </div>
   );
 }
 ```
 
-### Lista de Todos os Ícones
-
-```tsx
-import { IconList } from 'g-icons';
-
-function IconGallery() {
-  return (
-    <IconList 
-      size={32} 
-      color="#333"
-      onIconClick={(iconName) => console.log('Ícone clicado:', iconName)}
-    />
-  );
-}
-```
-
-## 🎨 Props
-
-Todos os ícones aceitam as seguintes props:
-
-| Prop | Tipo | Padrão | Descrição |
-|------|------|--------|-----------|
-| `size` | `number \| string` | `24` | Tamanho do ícone em pixels |
-| `color` | `string` | `currentColor` | Cor do ícone |
-| `className` | `string` | `''` | Classes CSS adicionais |
-| `...props` | `SVGProps` | - | Todas as props padrão do SVG |
-
-## 📚 Desenvolvimento
+## 🛠️ Desenvolvimento
 
 ### Pré-requisitos
+
+- Node.js 18+
+- npm ou yarn
+
+### Instalação das dependências
 
 ```bash
 npm install
 ```
 
-### Scripts Disponíveis
+### Scripts disponíveis
 
 ```bash
-# Gerar componentes dos SVGs
-npm run build:icons
+# Desenvolvimento
+npm run dev              # Inicia o servidor de desenvolvimento Vite
+npm run storybook        # Inicia o Storybook
 
-# Build da biblioteca
-npm run build
-
-# Desenvolvimento com watch
-npm run dev
-
-# Storybook
-npm run storybook
+# Build
+npm run build            # Build da biblioteca
+npm run build:icons      # Otimiza SVGs e gera componentes React
+npm run optimize:svgs    # Apenas otimiza os SVGs
+npm run build-storybook  # Build do Storybook
 
 # Testes
-npm run test
+npm run test             # Executa testes
+npm run test:watch       # Executa testes em modo watch
 
-# Lint
-npm run lint
+# Qualidade de código
+npm run lint             # Executa ESLint
+npm run lint:fix         # Corrige problemas do ESLint
+npm run type-check       # Verifica tipos TypeScript
 ```
 
-### Adicionando Novos Ícones
+## 🔧 Processo de Otimização de SVGs
 
-1. Adicione o arquivo SVG na pasta `svg/`
-2. Execute `npm run build:icons`
-3. Os componentes serão gerados automaticamente
+O projeto inclui um sistema automatizado de otimização de SVGs que:
 
-### Estrutura do Projeto
+### **1. Limpeza Automática**
+- Remove declarações XML desnecessárias
+- Remove comentários do Adobe Illustrator
+- Remove atributos de estilo inline
+- Remove IDs e classes específicas do Illustrator
+- Remove elementos vazios
+
+### **2. Otimização com SVGO**
+- Compressão inteligente de paths
+- Remoção de atributos redundantes
+- Normalização de viewBox
+- Conversão de atributos para camelCase
+
+### **3. Fluxo de Trabalho**
+```
+svg/ (originais)
+    ↓
+svg-optimized/ (otimizados)
+    ↓
+src/icons/ (componentes React)
+```
+
+### **4. Diretórios**
+- `svg/`: SVGs originais (não modificados)
+- `svg-optimized/`: SVGs otimizados (gerado automaticamente)
+- `src/icons/`: Componentes React gerados
+
+## 📚 Storybook
+
+O Storybook está configurado com:
+
+- **Icon Search**: Galeria interativa com busca por nome e categoria
+- **Documentação automática**: Baseada em TypeScript
+- **Controles interativos**: Para testar diferentes props
+- **Layout responsivo**: Para diferentes tamanhos de tela
+
+Para acessar: `http://localhost:6006`
+
+## 🏗️ Estrutura do Projeto
 
 ```
 g-icons/
-├── svg/                    # Arquivos SVG originais
 ├── src/
-│   ├── icons/             # Componentes gerados
-│   ├── types.ts           # Definições de tipos
-│   ├── Icon.tsx           # Componente principal
-│   └── index.ts           # Exportações
+│   ├── icons/           # Componentes de ícones gerados automaticamente
+│   ├── Icon.tsx         # Componente wrapper principal
+│   ├── types.ts         # Tipos TypeScript
+│   ├── index.ts         # Exports da biblioteca
+│   └── *.stories.tsx    # Stories do Storybook
+├── svg/                 # SVGs originais
+├── svg-optimized/       # SVGs otimizados (gerado automaticamente)
 ├── scripts/
-│   └── build-icons.js     # Script de geração
-├── stories/               # Storybook
-├── tests/                 # Testes
-└── dist/                  # Build de produção
+│   ├── optimize-svgs.cjs # Script de otimização
+│   └── build-icons.cjs   # Script de geração de componentes
+├── .storybook/          # Configuração do Storybook
+├── vite.config.ts       # Configuração do Vite
+└── package.json
 ```
 
-## 🧪 Testes
+## 🎨 Adicionando Novos Ícones
 
-```bash
-# Executar testes
-npm run test
+1. **Adicione o SVG** no diretório `svg/`
+2. **Execute a otimização**: `npm run build:icons`
+3. **Teste no Storybook**: `npm run storybook`
 
-# Testes com watch
-npm run test:watch
-
-# Cobertura de testes
-npm run test:coverage
-```
-
-## 📖 Storybook
-
-```bash
-# Iniciar Storybook
-npm run storybook
-
-# Build do Storybook
-npm run build-storybook
-```
-
-## 🤝 Contribuindo
-
-1. Fork o projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
-3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
-4. Push para a branch (`git push origin feature/AmazingFeature`)
-5. Abra um Pull Request
+O processo é totalmente automatizado!
 
 ## 📄 Licença
 
@@ -169,8 +144,4 @@ Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICE
 
 ## 🆘 Suporte
 
-Se você encontrar algum problema ou tiver dúvidas, por favor abra uma [issue](https://github.com/seu-usuario/g-icons/issues).
-
----
-
-Feito com ❤️ pela equipe G Icons 
+Para suporte, abra uma issue no GitHub ou entre em contato com a equipe. 

@@ -6,29 +6,12 @@ export interface IconComponentProps extends IconProps {
   name: string;
 }
 
-export const Icon: React.FC<IconComponentProps> = ({ 
-  name, 
-  size = 24, 
-  color = 'currentColor', 
-  className = '',
-  ...props 
-}) => {
-  const IconComponent = iconMapping[name];
-
-  if (!IconComponent) {
-    console.warn(`Ícone "${name}" não encontrado. Ícones disponíveis:`, availableIcons);
-    return null;
-  }
-
-  return (
-    <IconComponent
-      size={size}
-      color={color}
-      className={className}
-      {...props}
-    />
-  );
-};
+export const Icon: React.FC<IconProps> = ({ name = '', size = 24, color = 'currentColor' }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill={color} style={{ display: 'block' }}>
+    <circle cx="12" cy="12" r="10" />
+    <text x="12" y="16" fontSize="8" textAnchor="middle" fill="#fff">{name ? name[0] : ''}</text>
+  </svg>
+);
 
 // Componente utilitário para listar todos os ícones
 export const IconList: React.FC<{ 
