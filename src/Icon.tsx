@@ -1,7 +1,6 @@
 import React from 'react';
 import { IconProps } from './types';
 import { iconMapping, availableIcons } from './icons/mapping';
-import { FilledActionAdd } from './icons/filled-action-add';
 export interface IconComponentProps extends IconProps {
   name: string;
 }
