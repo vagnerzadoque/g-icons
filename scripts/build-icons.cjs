@@ -93,9 +93,6 @@ function generateIndexFile(components) {
   
   return `// Auto-generated file - Do not edit manually
 ${imports}
-
-// Re-export types
-export type { IconProps } from './types';
 `;
 }
 
@@ -186,6 +183,11 @@ function buildIcons() {
     .filter(file => file.endsWith('.svg'))
     .sort();
   
+  const components = svgFiles.map(fileName => ({
+    pascalName: fileNameToPascalCase(fileName),
+    kebabName: fileNameToKebabCase(fileName),
+  }));
+  
   console.log(`\n🔄 Processando ${svgFiles.length} ícones otimizados de: ${optimizedSvgDir}`);
   
   // OPT_CORRECTION: Verificar se há arquivos para processar
@@ -238,6 +240,16 @@ function buildIcons() {
     console.log('✅ Arquivo de mapeamento gerado');
   } catch (error) {
     console.error('❌ Erro ao gerar arquivo de mapeamento:', error.message);
+    errorCount++;
+  }
+  
+  // Gera o arquivo de índice de ícones para tree-shaking
+  try {
+    const indexPath = path.join(iconsDir, 'index.ts');
+    fs.writeFileSync(indexPath, generateIndexFile(components));
+    console.log('✅ Arquivo de índice (index.ts) gerado para tree-shaking');
+  } catch (error) {
+    console.error('❌ Erro ao gerar arquivo de índice:', error.message);
     errorCount++;
   }
   

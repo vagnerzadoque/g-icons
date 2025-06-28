@@ -36,15 +36,15 @@
     "vite",
     "storybook"
   ],
-  "author": "G-Icons Team",
+  "author": "Vagner Barbosa Team",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SEU-USUARIO/SEU-REPOSITORIO.git"
+    "url": "https://github.com/vagnerzadoque/g-icons.git"
   },
-  "homepage": "https://github.com/SEU-USUARIO/SEU-REPOSITORIO#readme",
+  "homepage": "https://github.com/vagnerzadoque/g-icons.git#readme",
   "bugs": {
-    "url": "https://github.com/SEU-USUARIO/SEU-REPOSITORIO/issues"
+    "url": "https://github.com/vagnerzadoque/g-icons.git/issues"
   },
   "dependencies": {},
   "devDependencies": {
