@@ -3,13 +3,13 @@
   "version": "1.0.0",
   "description": "Biblioteca de ícones React moderna construída com Vite",
   "type": "module",
-  "main": "./dist/index.js",
+  "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/index.js",
-      "require": "./dist/index.js",
+      "require": "./dist/index.cjs",
       "types": "./dist/index.d.ts"
     }
   },
@@ -38,10 +38,15 @@
   ],
   "author": "G-Icons Team",
   "license": "MIT",
-  "dependencies": {
-    "react": ">=16.8.0",
-    "react-dom": ">=16.8.0"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SEU-USUARIO/SEU-REPOSITORIO.git"
   },
+  "homepage": "https://github.com/SEU-USUARIO/SEU-REPOSITORIO#readme",
+  "bugs": {
+    "url": "https://github.com/SEU-USUARIO/SEU-REPOSITORIO/issues"
+  },
+  "dependencies": {},
   "devDependencies": {
     "@storybook/addon-essentials": "^8.0.0",
     "@storybook/addon-interactions": "^8.0.0",
@@ -59,6 +64,8 @@
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "storybook": "^8.0.0",
     "svgo": "^3.2.0",
     "terser": "^5.43.1",
