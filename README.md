@@ -1,4 +1,4 @@
-# G-Icons
+# GDS-Icons-React
 
 Uma biblioteca de ícones React moderna construída com Vite e TypeScript.
 
@@ -102,6 +102,8 @@ src/icons/ (componentes React)
 ## 📚 Storybook
 
 O Storybook está configurado com:
+
+- [Storybook - link](https://vagnerzadoque.github.io/g-icons/?path=/story/icons-icon-search--icon-gallery)
 
 - **Icon Search**: Galeria interativa com busca por nome e categoria
 - **Documentação automática**: Baseada em TypeScript
