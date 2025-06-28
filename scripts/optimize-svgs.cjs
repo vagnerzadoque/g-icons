@@ -52,6 +52,7 @@ const svgoConfig = {
             delete item.attr('x');
             delete item.attr('y');
             delete item.attr('style');
+            delete item.attr('fill');
             delete item.attr('xml:space');
             delete item.attr('enable-background');
             
@@ -108,6 +109,7 @@ function cleanSvgWithCheerio(svgContent) {
   $('*').removeAttr('style');
   $('svg').removeAttr('x y xml:space enable-background');
   $('*').removeAttr('id').removeAttr('class');
+  $('*').removeAttr('fill');
   
   // Garante viewBox
   if (!$('svg').attr('viewBox')) {
