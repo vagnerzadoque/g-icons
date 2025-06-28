@@ -27,6 +27,7 @@ type Story = StoryObj;
 const IconSearchComponent: React.FC<{ size?: number, color?: string }> = ({ size = 32, color = '#333' }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [copiedIcon, setCopiedIcon] = useState<string | null>(null);
 
   const categories = [
   "action",
@@ -660,9 +661,11 @@ const IconSearchComponent: React.FC<{ size?: number, color?: string }> = ({ size
   }, [searchTerm, selectedCategory, iconCategories]);
 
   const handleIconClick = (iconName: string) => {
-    console.log('Ícone clicado:', iconName);
-    // Aqui você pode adicionar lógica para copiar o nome do ícone
     navigator.clipboard?.writeText(iconName);
+    setCopiedIcon(iconName);
+    setTimeout(() => {
+      setCopiedIcon(null);
+    }, 1500);
   };
 
   return (
@@ -721,51 +724,81 @@ const IconSearchComponent: React.FC<{ size?: number, color?: string }> = ({ size
           gridTemplateColumns: 'repeat(auto-fill, minmax(120px, 1fr))', 
           gap: '16px' 
         }}>
-          {filteredIcons.map(iconName => (
-            <div
-              key={iconName}
-              onClick={() => handleIconClick(iconName)}
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                padding: '16px',
-                border: '1px solid #e0e0e0',
-                borderRadius: '8px',
-                cursor: 'pointer',
-                transition: 'all 0.2s ease',
-                backgroundColor: '#fff'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = '#f5f5f5';
-                e.currentTarget.style.transform = 'translateY(-2px)';
-                e.currentTarget.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = '#fff';
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = 'none';
-              }}
-            >
-              <Icon name={iconName} size={size} color={color} />
-              <div style={{ 
-                marginTop: '8px', 
-                fontSize: '12px', 
-                color: '#666',
-                wordBreak: 'break-word',
-                lineHeight: '1.3'
-              }}>
-                {iconName}
+          {filteredIcons.map(iconName => {
+            const isCopied = copiedIcon === iconName;
+            
+            const cardStyle: React.CSSProperties = {
+              position: 'relative',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              padding: '16px',
+              border: `1px solid ${isCopied ? '#4CAF50' : '#e0e0e0'}`,
+              borderRadius: '8px',
+              cursor: 'pointer',
+              transition: 'all 0.3s ease-in-out',
+              backgroundColor: '#fff',
+              boxShadow: isCopied ? '0 0 8px rgba(76, 175, 80, 0.6)' : 'none',
+              transform: isCopied ? 'translateY(-2px)' : 'translateY(0)',
+            };
+
+            const tooltipStyle: React.CSSProperties = {
+              visibility: isCopied ? 'visible' : 'hidden',
+              opacity: isCopied ? 1 : 0,
+              position: 'absolute',
+              top: '-30px',
+              backgroundColor: '#28a745',
+              color: '#fff',
+              padding: '5px 10px',
+              borderRadius: '6px',
+              fontSize: '13px',
+              fontWeight: 'bold',
+              whiteSpace: 'nowrap',
+              zIndex: 10,
+              transition: 'all 0.3s ease-in-out',
+            };
+
+            return (
+              <div
+                key={iconName}
+                onClick={() => handleIconClick(iconName)}
+                style={cardStyle}
+                onMouseEnter={(e) => {
+                  if (!isCopied) {
+                    e.currentTarget.style.backgroundColor = '#f5f5f5';
+                    e.currentTarget.style.transform = 'translateY(-2px)';
+                    e.currentTarget.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (!isCopied) {
+                    e.currentTarget.style.backgroundColor = '#fff';
+                    e.currentTarget.style.transform = 'translateY(0)';
+                    e.currentTarget.style.boxShadow = 'none';
+                  }
+                }}
+              >
+                <div style={tooltipStyle}>Copiado!</div>
+                <Icon name={iconName} size={size} color={color} />
+                <div style={{ 
+                  marginTop: '8px', 
+                  fontSize: '12px', 
+                  color: '#666',
+                  wordBreak: 'break-word',
+                  lineHeight: '1.3'
+                }}>
+                  {iconName}
+                </div>
+                <div style={{ 
+                  fontSize: '10px', 
+                  color: '#999',
+                  marginTop: '4px'
+                }}>
+                  {iconCategories[iconName]}
+                </div>
               </div>
-              <div style={{ 
-                fontSize: '10px', 
-                color: '#999',
-                marginTop: '4px'
-              }}>
-                {iconCategories[iconName]}
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       ) : (
         <div style={{ 
