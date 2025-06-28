@@ -43,6 +43,7 @@
     "url": "https://github.com/vagnerzadoque/g-icons.git"
   },
   "homepage": "https://github.com/vagnerzadoque/g-icons.git#readme",
+  "storybook": "https://vagnerzadoque.github.io/g-icons/?path=/story/icons-icon-search--icon-gallery",
   "bugs": {
     "url": "https://github.com/vagnerzadoque/g-icons.git/issues"
   },
