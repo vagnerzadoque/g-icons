@@ -74,8 +74,8 @@ export const ${componentName}: React.FC<IconProps> = ({
     <svg
       width={size}
       height={size}
-      viewBox="0 0 24 24"
-      fill="none"
+      viewBox={\`0 0 \${size} \${size}\`}
+      fill={color}
       xmlns="http://www.w3.org/2000/svg"
       className={className}
       {...props}
@@ -129,7 +129,7 @@ function generateMappingFile(iconFiles) {
   const availableIcons = iconFiles.map(fileName => `  '${fileNameToKebabCase(fileName)}'`).join(',\n');
 
   return `// Auto-generated icon mapping - Do not edit manually
-import { IconComponent } from './types';
+import { IconComponent } from '../types';
 ${imports}
 
 export const iconMapping: Record<string, IconComponent> = {

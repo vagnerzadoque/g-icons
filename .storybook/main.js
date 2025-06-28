@@ -1,8 +1,13 @@
 import { resolve } from 'path';
+import { mergeConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
 /** @type { import('@storybook/react-vite').StorybookConfig } */
 const config = {
-  stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
+  stories: [
+    '../src/**/*.mdx',
+    '../src/**/*.stories.@(ts|tsx)',     // só TS/TSX
+  ],
   addons: [
     '@storybook/addon-links',
     '@storybook/addon-essentials',
@@ -15,23 +20,27 @@ const config = {
   docs: {
     autodocs: 'tag',
   },
-  viteFinal: async (config) => {
-    // Configuração personalizada do Vite
-    if (config.resolve) {
-      config.resolve.alias = {
-        ...config.resolve.alias,
-        '@': resolve(__dirname, '../src'),
-      };
-    }
-    
-    // Garantir que o Vite resolva corretamente os módulos
-    config.optimizeDeps = {
-      ...config.optimizeDeps,
-      include: ['react', 'react-dom'],
-    };
-    
-    return config;
+
+  async viteFinal(originalConfig) {
+    return mergeConfig(originalConfig, {
+      // O framework @storybook/react-vite já configura o plugin do React.
+      // A reconfiguração manual que existia aqui foi removida para evitar conflitos.
+
+      // 2) Seu alias “@” para src continua
+      resolve: {
+        alias: {
+          ...(originalConfig.resolve?.alias || {}),
+          '@': resolve(__dirname, '../src'),
+        },
+      },
+
+      // 3) Pré-bundle de React/React-DOM
+      optimizeDeps: {
+        ...(originalConfig.optimizeDeps || {}),
+        include: ['react', 'react-dom'],
+      },
+    });
   },
 };
 
-export default config; 
+export default config;

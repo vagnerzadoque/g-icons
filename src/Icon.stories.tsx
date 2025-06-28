@@ -45,7 +45,7 @@ export const FilledBrandFacebook: Story = {
 export const FilledAlertWarning: Story = {
   args: {
     name: 'filled-alert-warning',
-    size: 32,
+    size: 40,
     color: '#ffc107',
   },
 };
@@ -61,7 +61,7 @@ export const FilledContentGiftpricefair: Story = {
 export const Large: Story = {
   args: {
     name: 'filled-action-check',
-    size: 64,
+    size: 24,
     color: '#28a745',
   },
 };
@@ -69,7 +69,7 @@ export const Large: Story = {
 export const Small: Story = {
   args: {
     name: 'filled-action-check',
-    size: 16,
+    size: 24,
     color: '#28a745',
   },
 }; 

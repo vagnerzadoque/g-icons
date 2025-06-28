@@ -1,17 +1,18 @@
 import React from 'react';
 import { IconProps } from './types';
 import { iconMapping, availableIcons } from './icons/mapping';
-
+import { FilledActionAdd } from './icons/filled-action-add';
 export interface IconComponentProps extends IconProps {
   name: string;
 }
 
-export const Icon: React.FC<IconProps> = ({ name = '', size = 24, color = 'currentColor' }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill={color} style={{ display: 'block' }}>
-    <circle cx="12" cy="12" r="10" />
-    <text x="12" y="16" fontSize="8" textAnchor="middle" fill="#fff">{name ? name[0] : ''}</text>
-  </svg>
-);
+export const Icon: React.FC<IconProps> = ({ name = '', size = 24, color = 'currentColor' }) => {
+  let IconComponent = iconMapping[name];
+ return (<>
+     <IconComponent size={size} color={color} />
+ </>)
+ 
+};
 
 // Componente utilitário para listar todos os ícones
 export const IconList: React.FC<{ 
@@ -49,7 +50,7 @@ export const IconList: React.FC<{
               }
             }}
           >
-            <IconComponent size={size} color={color} />
+            <IconComponent size={size} fill='red' />
             <span style={{ fontSize: '12px', marginTop: '4px', textAlign: 'center' }}>
               {iconName}
             </span>

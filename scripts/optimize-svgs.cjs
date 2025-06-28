@@ -13,6 +13,7 @@ const svgoConfig = {
     'cleanupAttrs',
     'mergeStyles',
     'inlineStyles',
+    'convertStyleToAttrs',
     'minifyStyles',
     'cleanupIds',
     'removeUselessDefs',
@@ -39,6 +40,7 @@ const svgoConfig = {
     'sortDefsChildren',
     'removeTitle',
     'removeDesc',
+    'removeStyleElement',
     // Plugin customizado para limpeza específica
     {
       name: 'removeAdobeAttributes',
@@ -103,7 +105,8 @@ function cleanSvgWithCheerio(svgContent) {
   $('g:empty, defs:empty').remove();
   
   // Remove atributos desnecessários
-  $('svg').removeAttr('x y style xml:space enable-background');
+  $('*').removeAttr('style');
+  $('svg').removeAttr('x y xml:space enable-background');
   $('*').removeAttr('id').removeAttr('class');
   
   // Garante viewBox
