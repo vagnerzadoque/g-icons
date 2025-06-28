@@ -1,5 +1,5 @@
 {
-  "name": "g-icons",
+  "name": "gds-icons-react",
   "version": "1.0.0",
   "description": "Biblioteca de ícones React moderna construída com Vite",
   "type": "module",
