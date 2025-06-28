@@ -1,7 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { Icon } from './Icon';
-import { getIconNames } from './Utils/getOptions';
 
 const meta: Meta = {
   title: 'Icons/Icon Search',
@@ -29,6 +28,7 @@ const IconSearchComponent: React.FC<{ size?: number, color?: string }> = ({ size
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [copiedIcon, setCopiedIcon] = useState<string | null>(null);
 
+ 
   const categories = [
   "action",
   "alert",
@@ -640,6 +640,7 @@ const IconSearchComponent: React.FC<{ size?: number, color?: string }> = ({ size
   "outlined-social-userlock": "social"
 };
 
+
   const filteredIcons = useMemo(() => {
     let icons = Object.keys(iconCategories);
     
@@ -821,3 +822,4 @@ export const IconGallery: Story = {
     color: '#333',
   },
 };
+
