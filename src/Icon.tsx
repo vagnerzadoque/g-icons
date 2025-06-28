@@ -50,7 +50,7 @@ export const IconList: React.FC<{
               }
             }}
           >
-            <IconComponent size={size} fill='red' />
+            <IconComponent size={size} color={color} />
             <span style={{ fontSize: '12px', marginTop: '4px', textAlign: 'center' }}>
               {iconName}
             </span>

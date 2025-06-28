@@ -1,9 +1,15 @@
 import React, { useState, useMemo } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { Icon } from './Icon';
+import { getIconNames } from './Utils/getOptions';
 
 const meta: Meta = {
   title: 'Icons/Icon Search',
+  argTypes: {
+    size: { control: { type: 'number', min: 16, max: 64, step: 4 }, description: 'Tamanho do ícone em pixels' },
+    color: { control: 'color', description: 'Cor do ícone' },
+
+  },
   parameters: {
     layout: 'fullscreen',
     docs: {
@@ -18,7 +24,7 @@ const meta: Meta = {
 export default meta;
 type Story = StoryObj;
 
-const IconSearchComponent: React.FC = () => {
+const IconSearchComponent: React.FC<{ size?: number, color?: string }> = ({ size = 32, color = '#333' }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
 
@@ -741,7 +747,7 @@ const IconSearchComponent: React.FC = () => {
                 e.currentTarget.style.boxShadow = 'none';
               }}
             >
-              <Icon name={iconName} size={32} color="#333" />
+              <Icon name={iconName} size={size} color={color} />
               <div style={{ 
                 marginTop: '8px', 
                 fontSize: '12px', 
@@ -776,5 +782,9 @@ const IconSearchComponent: React.FC = () => {
 };
 
 export const IconGallery: Story = {
-  render: () => <IconSearchComponent />
+  render: (args) => <IconSearchComponent {...args} />,
+  args: {
+    size: 32,
+    color: '#333',
+  },
 };
